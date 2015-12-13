@@ -1,0 +1,28 @@
+[general]
+accounts = posteo
+
+[Account posteo]
+localrepository = Local
+remoterepository = posteo.de
+autorefresh = 2
+quick = 5
+
+[Repository Local]
+type = Maildir
+localfolders = ~/posteo.de
+existsok = yes
+
+[Repository posteo.de]
+type = IMAP
+remotehost = posteo.de
+remoteuser = jakub.hrozek@posteo.de
+ssl = yes
+cert_fingerprint = 3a89d8addca7235c8f44e9dd2e856a31d2d3c970
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt_posteo_mailboxes
+header = "mailboxes "
+peritem = "~/%(accountname)s.de/%(foldername)s"
+sep = " "
+footer = "\n"
