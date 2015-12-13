@@ -31,3 +31,6 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
+[submodule "vim/bundle/inkpot"]
+	path = vim/bundle/inkpot
+	url = https://github.com/ciaranm/inkpot.git
