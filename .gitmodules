@@ -4,3 +4,6 @@
 [submodule "vim/bundle/cscope_maps.vim"]
 	path = vim/bundle/cscope_maps.vim
 	url = https://github.com/simplyzhao/cscope_maps.vim.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
