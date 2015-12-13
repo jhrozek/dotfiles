@@ -46,3 +46,6 @@
 [submodule "vim/bundle/vim-gitmodeline"]
 	path = vim/bundle/vim-gitmodeline
 	url = git://git.cryptomilk.org/projects/vim-gitmodeline.git/
+[submodule "vim/bundle/YouCompleteMe"]
+	path = vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
