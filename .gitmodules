@@ -43,3 +43,6 @@
 [submodule "vim/bundle/vim-autotag"]
 	path = vim/bundle/vim-autotag
 	url = https://github.com/craigemery/vim-autotag.git
+[submodule "vim/bundle/vim-gitmodeline"]
+	path = vim/bundle/vim-gitmodeline
+	url = git://git.cryptomilk.org/projects/vim-gitmodeline.git/
