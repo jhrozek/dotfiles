@@ -1,3 +1,6 @@
 [submodule "vim/bundle/DoxygenToolkit.vim"]
 	path = vim/bundle/DoxygenToolkit.vim
 	url = https://github.com/vim-scripts/DoxygenToolkit.vim.git
+[submodule "vim/bundle/cscope_maps.vim"]
+	path = vim/bundle/cscope_maps.vim
+	url = https://github.com/simplyzhao/cscope_maps.vim.git
