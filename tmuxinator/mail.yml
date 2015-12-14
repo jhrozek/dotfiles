@@ -1,6 +1,6 @@
 # ~/.tmuxinator/mail.yml
 
-name: mail
+name: mail-sth
 root: ~/devel/sssd
 
 # Optional tmux socket
@@ -19,5 +19,9 @@ root: ~/devel/sssd
 # tmux_command: byobu
 
 windows:
-  - isync: ~/bin/check_mail.sh
+  - isync: bash /home/remote/jhrozek/bin/check_mail.sh
   - mail: mutt
+  - chat: mosh zeppelin.brq.redhat.com
+  - notifications: bash /home/remote/jhrozek/bin/irssi-remote.sh
+  - vpn: sudo openvpn /etc/openvpn/work.conf
+  - viber:
