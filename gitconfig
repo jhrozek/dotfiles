@@ -29,6 +29,7 @@
 [alias]
         a = apply --index
         ac = "!f() { curl $@ | git a; }; f"
+        ai = add -e
         ai = add -i
         ap = add -p
         di = diff -p --stat
@@ -73,3 +74,5 @@
         sb = show-branch
         mail = send-email --compose
         w = status -b -s -uno
+[diff]
+	tool = meld
