@@ -97,6 +97,7 @@ alias cds='cd $HOME/devel/sssd'
 alias cdr='cd $HOME/devel/rhel-git/'
 alias cdb='cd /dev/shm/sssd'
 alias bodhi='bodhi -u jhrozek'
+#alias git='hub'
 
 alias lexec='libtool --mode=execute '
 alias lgdb='libtool --mode=execute gdb'
