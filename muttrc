@@ -3,10 +3,13 @@ set from="Jakub Hrozek <jhrozek@redhat.com>"
 set realname="Jakub Hrozek"
 
 # Incoming
-set folder="~/Mail"
-set spoolfile="=INBOX"
+set folder="~/.maildir"
+set spoolfile="=Inbox"
 set mbox_type="Maildir"
-set record="=INBOX"
+set record="=Inbox"
+
+# Editor
+set editor="/usr/bin/vim"
 
 # Outgoing
 set sendmail="/usr/bin/msmtp"
@@ -14,8 +17,19 @@ set sendmail="/usr/bin/msmtp"
 # Alert on these mailboxes
 source ~/.muttrc_mbsync_mboxes
 
-# These are not meant to be under VCS control!
-source local/redhat_muttrc
+# Identify lists
+subscribe fedora-.*@redhat.com
+subscribe .*-list@redhat.com
+subscribe .*-staff@redhat.com
+subscribe .*-devel@redhat.com
+subscribe .*-announce@redhat.com
+subscribe .*-commit.*@redhat.com
+subscribe .*@lists.fedoraproject.org
+subscribe core-services-brno@redhat.com
+subscribe cloud-tech-planning@redhat.com
+subscribe media-monitor@redhat.com
+subscribe rhel7-planning@redhat.com
+subscribe sssd-maint@redhat.com
 
 set include=yes           # include original text on reply?
 set forward_quote=yes     # include original text on forward?
@@ -24,19 +38,23 @@ set record="=Sent"
 set delete=yes            # don't ask for delete confirmation
 
 # Shortcuts for most used folders
-macro index ".f"  "<change-folder>=INBOX.IPA.freeipa-devel<enter>"
-macro index ".u"  "<change-folder>=INBOX.IPA.freeipa-users<enter>"
-macro index ".s"  "<change-folder>=INBOX.IPA.sssd-devel<enter>"
-macro index ".t"  "<change-folder>=INBOX.IPA.ipa-and-samba-list<enter>"
-macro index ".i"  "<change-folder>=INBOX<enter>"
-macro index ".b"  "<change-folder>=INBOX.bugzilla<enter>"
+macro index ".f"  "<change-folder>=Inbox/.IPA/.freeipa-devel<enter>"
+macro index ".u"  "<change-folder>=Inbox/.IPA/.freeipa-users<enter>"
+macro index ".s"  "<change-folder>=Inbox/.IPA/.sssd-devel<enter>"
+macro index ".t"  "<change-folder>=Inbox/.IPA/.ipa-and-samba-list<enter>"
+macro index ".b"  "<change-folder>=Inbox/.bugzilla<enter>"
+macro index ".i"  "<change-folder>=Inbox<enter>"
 
 # Go to previous,next flagged message
 macro index gF <search-reverse>~F<enter>
 macro index gf <search>~F<enter>
 
+# Go back to index
+macro pager i <exit>
+
 bind index ] next-unread-mailbox
 bind index } next-new
+bind index F "flag-message"         # toggle a message's 'important' flag
 
 # Thread messages by default, sort by date in the thread
 set sort=threads
@@ -50,6 +68,12 @@ set index_format = "%Z %{%b %d} %-15.15F (%2X)[%M] %s"
 
 # Assume UTF8
 set assumed_charset = utf-8
+
+# MIME processing
+set mailcap_path    = ~/.mailcap
+auto_view text/html
+alternative_order text/plain text/html
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && firefox ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
 
 # LDAP search
 set query_command="${HOME}/bin/mutt_ldap_query '%s'"
@@ -75,6 +99,24 @@ set   narrow_tree
 # don't go to next message at end of message
 set   pager_stop
 
+# sidebar
+set sidebar_width       = 30
+set sidebar_visible     = yes
+set sidebar_short_path
+# Shorten mailbox names
+ set sidebar_delim_chars="/"
+# # Delete everything up to the last / character
+ set sidebar_folder_indent
+# # Indent folders whose names we've shortened
+ set sidebar_indent_string="  "
+# # Indent with two spaces
+set sidebar_new_mail_only
+#color sidebar_new yellow default
+#bind index <left> sidebar-prev
+#bind index <right> sidebar-next
+#bind index <space> sidebar-open
+#bind index B sidebar-toggle
+
 # when forwarding a message, attach it. Useful for forwarding attachments
 # To forward a message inline, use "bounce"
 set mime_forward=yes
@@ -87,13 +129,21 @@ alternative_order text/plain text/enriched text/html     # save html for last
 # keep a cache of headers for faster loading (1.5.9+?)
 set header_cache=~/.hcache
 # Don't wait to enter mailbox manually 
-#unset imap_passive        
+unset imap_passive        
 # Automatically poll subscribed mailboxes for new mail (new in 1.5.11)
-#set imap_check_subscribed
+set imap_check_subscribed
 # Reduce polling frequency to a sane level
 set mail_check=60
 # And poll the current mailbox more often (not needed with IDLE in post 1.5.11)
 set timeout=10
+
+# Aliases
+alias sssd              sssd-devel@lists.fedorahosted.org
+alias sssd-users        sssd-users@lists.fedorahosted.org
+alias freeipa           freeipa-devel@redhat.com
+alias freeipa-interest  freeipa-interest@redhat.com
+alias freeipa-users     freeipa-users@redhat.com
+alias team-list         ipa-and-samba-team-list@redhat.com
 
 # Colors
 color attachment brightmagenta black  
