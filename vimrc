@@ -400,10 +400,10 @@ function! CommitMessages()
     nmap S iSigned-off-by: Jakub Hrozek <jakub.hrozek@posteo.se><CR><ESC>
     iab #R Reviewed-by:
     iab JH Jakub<SPACE>Hrozek<SPACE><jhrozek@redhat.com>
+    iab SJH Jakub<SPACE>Hrozek<SPACE><jakub.hrozek@posteo.se>
     iab LS Lukáš<SPACE>Slebodník<SPACE><lslebodn@redhat.com>
     iab MZ Michal<SPACE>Židek<SPACE><mzidek@redhat.com>
     iab PB Pavel<SPACE>Březina<SPACE><pbrezina@redhat.com>
-    iab PR Pavel<SPACE>Reichl<SPACE><preichl@redhat.com>
     iab SB Sumit<SPACE>Bose<SPACE><sbose@redhat.com>
     iab NK Nikolai<SPACE>Kondrashov<SPACE><Nikolai.Kondrashov@redhat.com>
     iab SG Stephen<SPACE>Gallagher<SPACE><sgallagh@redhat.com>
@@ -411,6 +411,7 @@ function! CommitMessages()
     iab SW Stef<SPACE>Walter<SPACE><stefw@redhat.com>
     iab PC Petr<SPACE>Cech<SPACE><pcech@redhat.com>
     iab AB Alexander<SPACE>Bokovoy<SPACE><abokovoy@redhat.com>
+    iab FF Fabiano<SPACE>Fidêncio<SPACE><fabiano@fidencio.org>
 endf
 autocmd BufWinEnter COMMIT_EDITMSG,*.diff,*.patch,*.patches.txt call CommitMessages()
 
