@@ -97,7 +97,7 @@ alias cds='cd $HOME/devel/sssd'
 alias cdr='cd $HOME/devel/rhel-git/'
 alias cdb='cd /dev/shm/sssd'
 alias bodhi='bodhi -u jhrozek'
-#alias git='hub'
+alias git='hub'
 
 alias lexec='libtool --mode=execute '
 alias lgdb='libtool --mode=execute gdb'
@@ -132,9 +132,6 @@ export DISABLE_AUTO_TITLE=true
 # run check tests in nofork mode to ease debugging
 export CK_FORK="no"
 
-alias configure='./configure --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-redhat-linux-gnu --program-prefix= --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib64 --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/var/lib --mandir=/usr/share/man --with-test-dir=/dev/shm --infodir=/usr/share/info --enable-silent-rules --enable-nsslibdir=/lib64 --enable-pammoddir=/lib64/security --enable-all-experimental-features'
-alias configure-stable='./configure --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-redhat-linux-gnu --program-prefix= --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include --libdir=/usr/lib64 --libexecdir=/usr/libexec --localstatedir=/var --sharedstatedir=/var/lib --mandir=/usr/share/man --with-test-dir=/dev/shm --infodir=/usr/share/info --enable-silent-rules --enable-nsslibdir=/lib64'
-
 if [ -f /home/remote/jhrozek/.bashrc_sssd ]; then
     . /home/remote/jhrozek/.bashrc_sssd
 fi
@@ -142,3 +139,11 @@ fi
 export PATH="/home/remote/jhrozek/bin:/home/remote/jhrozek/devel/golang/bin:$PATH"
 
 export GOPATH="/home/remote/jhrozek/devel/golang"
+
+s_review_pr() {
+    git checkout -b pr$1 --track github/pull/$1
+}
+
+s_apply_pr() {
+    git am https://github.com/SSSD/sssd/pull/8
+}
