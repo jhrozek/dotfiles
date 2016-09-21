@@ -411,7 +411,7 @@ function! CommitMessages()
     iab SW Stef<SPACE>Walter<SPACE><stefw@redhat.com>
     iab PC Petr<SPACE>Cech<SPACE><pcech@redhat.com>
     iab AB Alexander<SPACE>Bokovoy<SPACE><abokovoy@redhat.com>
-    iab FF Fabiano<SPACE>Fidêncio<SPACE><fabiano@fidencio.org>
+    iab FF Fabiano<SPACE>Fidêncio<SPACE><fidencio@redhat.com>
 endf
 autocmd BufWinEnter COMMIT_EDITMSG,*.diff,*.patch,*.patches.txt call CommitMessages()
 
