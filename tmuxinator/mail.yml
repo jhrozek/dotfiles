@@ -21,7 +21,7 @@ root: ~/devel/sssd
 windows:
   - isync: bash /home/remote/jhrozek/bin/check_mail.sh
   - mail: mutt
-  - chat: mosh zeppelin.brq.redhat.com
+  - chat: ssh zeppelin.brq.redhat.com
   - notifications: bash /home/remote/jhrozek/bin/irssi-remote.sh
   - vpn: sudo openvpn /etc/openvpn/work.conf
   - viber:

@@ -1,0 +1,27 @@
+IMAPAccount redhat
+Host INSERT-MAIL-SERVER
+User jhrozek
+SSLType IMAPS
+SSLVersion TLSv1 TLSv1.1 TLSv1.2
+CertificateFile ~/newca.crt
+ 
+IMAPStore redhat-remote
+Account redhat
+ 
+MaildirStore redhat-local
+# The trailing "/" is important
+Path ~/.maildir/
+Inbox ~/.maildir/Inbox
+#Thrash ...
+ 
+Channel redhat
+Master :redhat-remote:
+Slave :redhat-local:
+Patterns *
+Create Slave
+
+Sync All
+
+Expunge Slave
+# Save the synchronization state files in the relevant directory
+SyncState *

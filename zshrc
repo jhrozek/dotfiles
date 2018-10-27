@@ -5,7 +5,7 @@ export ZSH=/home/remote/jhrozek/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="lukerandall"
+ZSH_THEME="pygmalion"
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -96,8 +96,8 @@ alias make='make -j4'
 alias cds='cd $HOME/devel/sssd'
 alias cdr='cd $HOME/devel/rhel-git/'
 alias cdb='cd /dev/shm/sssd'
-alias bodhi='bodhi -u jhrozek'
 alias git='hub'
+alias vim="nvim -u ~/.vimrc"
 
 alias lexec='libtool --mode=execute '
 alias lgdb='libtool --mode=execute gdb'
@@ -109,7 +109,11 @@ alias download="wget --no-verbose --no-parent --recursive --level=1 --no-directo
 alias multihead="xrandr --output eDP1 --auto --output DP2-2 --auto --left-of eDP1"
 alias singlehead="xrandr --output LVDS1"
 
+alias tmux="tmux -2"
+alias mutt="neomutt"
 alias posteo="mutt -F ~/.muttrc_posteo"
+alias rhcopr="copr-cli --config=/home/remote/jhrozek/.config/copr-rh"
+
 alias coverage_cflags="export CFLAGS=\"-g -O0 -Wall -W -Wno-unused-parameter -Wno-sign-compare -fprofile-arcs -ftest-coverage\"; export LDFLAGS=\"-fprofile-arcs -ftest-coverage\""
 
 # allow core
@@ -145,5 +149,19 @@ s_review_pr() {
 }
 
 s_apply_pr() {
-    git am https://github.com/SSSD/sssd/pull/8
+    git am https://github.com/SSSD/sssd/pull/$1
 }
+
+#case "$TERM" in
+#    *256color*)
+#        if test -x /usr/bin/powerline-daemon; then
+#            $(/usr/bin/powerline-daemon -q)
+#            if test -z "$MC_SID"; then
+#                source /usr/share/powerline/bash/powerline.sh
+#            fi
+#        fi
+#    ;;
+#    dumb)
+#        KEYCHAIN=0
+#    ;;
+#esac 

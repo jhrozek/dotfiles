@@ -37,6 +37,10 @@ set copy=yes              # Save copies of sent messages?
 set record="=Sent"
 set delete=yes            # don't ask for delete confirmation
 
+# Remap "leaders" for some of my shortcuts to not clash with neomutt
+bind index . noop
+bind index g noop
+
 # Shortcuts for most used folders
 macro index ".f"  "<change-folder>=Inbox/.IPA/.freeipa-devel<enter>"
 macro index ".u"  "<change-folder>=Inbox/.IPA/.freeipa-users<enter>"
@@ -56,6 +60,9 @@ bind index ] next-unread-mailbox
 bind index } next-new
 bind index F "flag-message"         # toggle a message's 'important' flag
 
+macro index \cb |urlview\n
+macro pager \cb |urlview\n
+
 # Thread messages by default, sort by date in the thread
 set sort=threads
 set sort_aux = 'last-date-received'
@@ -73,10 +80,9 @@ set assumed_charset = utf-8
 set mailcap_path    = ~/.mailcap
 auto_view text/html
 alternative_order text/plain text/html
-macro attach 'V' "<pipe-entry>cat >~/.cache/mutt/mail.html && firefox ~/.cache/mutt/mail.html && rm ~/.cache/mutt/mail.html<enter>"
 
 # LDAP search
-set query_command="${HOME}/bin/mutt_ldap_query '%s'"
+set query_command="${HOME}/bin/go-mutt-query '%s'"
 
 # save attachments, patches
 macro attach W <save-entry><kill-line>/home/remote/jhrozek/download/<enter>
@@ -103,6 +109,8 @@ set   pager_stop
 set sidebar_width       = 30
 set sidebar_visible     = yes
 set sidebar_short_path
+set sidebar_format = "%B %* %?N?%N/?%S"
+set sidebar_sort_method = 'path'
 # Shorten mailbox names
  set sidebar_delim_chars="/"
 # # Delete everything up to the last / character
@@ -110,11 +118,11 @@ set sidebar_short_path
 # # Indent folders whose names we've shortened
  set sidebar_indent_string="  "
 # # Indent with two spaces
-set sidebar_new_mail_only
+#set sidebar_new_mail_only
 #color sidebar_new yellow default
-#bind index <left> sidebar-prev
-#bind index <right> sidebar-next
-#bind index <space> sidebar-open
+bind index <left> sidebar-prev
+bind index <right> sidebar-next
+bind index <space> sidebar-open
 #bind index B sidebar-toggle
 
 # when forwarding a message, attach it. Useful for forwarding attachments
@@ -145,25 +153,25 @@ alias freeipa-interest  freeipa-interest@redhat.com
 alias freeipa-users     freeipa-users@redhat.com
 alias team-list         ipa-and-samba-team-list@redhat.com
 
-# Colors
+## Colors
 color attachment brightmagenta black  
 color error brightwhite red   # errors yell at you in red
-color hdrdefault red black   # headers
-color indicator brightyellow magenta # currently selected message
+color indicator brightwhite brightblack # currently selected message
 color markers brightcyan black  # the + for wrapped pager lines
 color message brightcyan black  # informational messages, not mail
 color normal white black    # plain text
 color quoted green black  # quoted text
 color search brightgreen black # hilite search patterns in the pager
 color signature red black    # signature (after "-- ") is red 
-color status brightyellow blue # status bar is yellow *on blue*   
+color status green brightblack # status bar is yellow *on blue*   
 color tilde blue black  # ~'s after message body
 color tree red black    # thread tree in index menu is magenta
 color signature brightred black
 color underline yellow black
-color header cyan black ^(From|Subject): # Important headers
-color body magenta black "(ftp|http)://[^ ]+"  # picks up URLs
-color body magenta black [-a-z_0-9.]+@[-a-z_0-9.]+
+color hdrdefault cyan black   # headers
+color header brightblue black ^(From|Subject): # Important headers
+color body cyan black "(ftp|http)://[^ ]+"  # picks up URLs
+color body cyan black [-a-z_0-9.]+@[-a-z_0-9.]+
 # Coloring quoted text - coloring the first 7 levels:
 color quoted    cyan black
 color quoted1   yellow black
@@ -177,8 +185,8 @@ color quoted7   green black
 color body  yellow black "[;:]-[)/(|]"
 color body  yellow black "[;:][)/(|]"
 color body  green black "alpha:\+://[^ ]*"
-color index brightyellow black ~N      # New
-color index yellow black ~O              # Old
+color index yellow black ~N      # New
+color index brightyellow black ~O              # Old
 color index magenta black ~F
 color index blue black ~T
 color index red black ~D

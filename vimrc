@@ -20,6 +20,10 @@ if has('vim_starting')
     call vundle#rc()
 endif
 
+if !has('gui_running')
+    set mouse=
+endif
+
 " =========================
 "   Plugins, managed by vundle
 " =========================
@@ -46,17 +50,20 @@ Plugin 'craigemery/vim-autotag'
 " Maps for cscope
 Plugin 'simplyzhao/cscope_maps.vim'
 " Fancy tree on the left
-Plugin 'taglist.vim'
+Plugin 'majutsushi/tagbar'
 
 " -- Doxygen helpers
 Plugin 'DoxygenToolkit.vim'
 
 " -- Look'n'feel plugins
 Plugin 'bling/vim-airline'
-Bundle 'Lokaltog/powerline'
+Plugin 'roman/golden-ratio'
+Bundle 'stephenmckinney/vim-solarized-powerline'
+
 
 " -- Colors
 Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized.git'
 
 " -- Filysystem browser
 Plugin 'scrooloose/nerdtree'
@@ -101,13 +108,14 @@ fun! LoadColourScheme(schemes)
 endfun
 
 if has('gui')
-   call LoadColourScheme("molokai:inkpot:Tomorrow-Night-Eighties:molokai:jellybean")
+   call LoadColourScheme("desert")
 else
    if &t_Co == 88 || &t_Co == 256
        " molokai
        let g:rehash256 = 1
 
-       call LoadColourScheme("molokai:inkpot:Tomorrow-Night-Eighties:molokai:jellybean")
+       "call LoadColourScheme("molokai:inkpot:Tomorrow-Night-Eighties:molokai:jellybean")
+       call LoadColourScheme("desert")
    else
 "       call LoadColourScheme("desert256:darkblack:desert:darkblue:elflord")
 "       Colorize some default highlight groups
@@ -166,6 +174,7 @@ else
     endif
 endif
 set background=dark
+colorscheme desert
 
 " =========================
 "   Vim UI
@@ -201,6 +210,10 @@ set   wildmode=longest:full,full
 set   wildignore=*.o,*~
 " errorbells: damn this beep!  ;-)
 set   noerrorbells
+
+""" Otherwise goldenview resizes hint windows
+set completeopt=menuone
+
 
 ""       modeline:  Allow the last line to be a modeline - useful
 ""       when the last line in sig gives the preferred textwidth
@@ -334,7 +347,7 @@ map <C-\>t :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 " Ctrl+\ then v to open a tag in a vertical split
 map <C-\>v :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " Display tags in a side pane
-nnoremap <F5> :TlistToggle<CR>
+nnoremap <F5> :TagbarToggle<CR>
 " Display filesystem in a side pane
 nnoremap <F6> :NERDTreeToggle<CR>
 " Toggle the paste mode
@@ -355,7 +368,6 @@ let g:git_commit_window_height = 15
 
 " Airline settings
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_powerline_fonts = 1
 
 " YouCompleteMe settings
 "let ycm_auto_trigger = 0
@@ -363,7 +375,8 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_enable_diagnostic_signs = 0 " Else we have issues with gitgutter
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " doxygen vim config
 " http://www.vim.org/scripts/script.php?script_id=987
@@ -391,6 +404,8 @@ let g:DoxygenToolkit_endCommentBlock = " */"
 " manpageview
 let g:manpageview_winopen = "hsplit="
 let g:manpageview_multimanpage = 0
+
+let g:golden_ratio_exclude_nonmodifiable = 1
 
 " =========================
 "   Git commit helpers
